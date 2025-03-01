@@ -3,7 +3,7 @@ import Header from './components/Header';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [bgImage, setBgImage] = useState('/assets/bg-light.svg');
+  const [bgImage, setBgImage] = useState('https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-light_rfwg6f.svg');
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -12,10 +12,10 @@ function App() {
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark-mode');
-      setBgImage('/assets/bg-dark.svg');
+      setBgImage('https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-dark_ogqm8s.svg');
     } else {
       document.body.classList.remove('dark-mode');
-      setBgImage('/assets/bg-light.svg');
+      setBgImage('https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-light_rfwg6f.svg');
     }
   }, [darkMode]);
 
