@@ -17,10 +17,16 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-slate-800' : 'bg-slate-50'} transition-colors duration-300`}>
+    <div
+      className={`min-h-screen transition-colors duration-300 ease-in-out ${
+        darkMode
+          ? 'bg-slate-800 bg-[url("/assets/bg-dark.svg")]'
+          : 'bg-slate-50 bg-[url("/assets/bg-light.svg")]'
+      } bg-cover bg-center bg-no-repeat transition-all`}
+    >
       <div className="container mx-auto px-4 py-8">
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-</div>
+      </div>
     </div>
   );
 }
