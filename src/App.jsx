@@ -20,6 +20,7 @@ function App() {
     <div className={`min-h-screen ${darkMode ? 'bg-slate-800' : 'bg-slate-50'} transition-colors duration-300`}>
       <div className="container mx-auto px-4 py-8">
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <p>hi</p>
 </div>
     </div>
   );
