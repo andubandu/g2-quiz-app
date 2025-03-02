@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
-const htmlICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/html_qai183.svg';
-const cssICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/css_ozpcjt.svg';
-const jsICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/js_d5uzgu.svg';
-const accessibilityICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/accessibility_bfnmin.svg';
 const darkICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-dark_ogqm8s.svg';
 const lightICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-light_rfwg6f.svg';
 const lightICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903938/pattern-background-mobile-light_dr2nzs.svg'
