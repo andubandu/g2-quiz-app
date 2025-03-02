@@ -3,26 +3,53 @@ import Header from './components/Header';
 const htmlICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/html_qai183.svg';
 const cssICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/css_ozpcjt.svg';
 const jsICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/js_d5uzgu.svg';
-const accessibilityICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/js_d5uzgu.svg';
-
+const accessibilityICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/accessibility_bfnmin.svg';
+const darkICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-dark_ogqm8s.svg';
+const lightICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-light_rfwg6f.svg';
+const lightICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903938/pattern-background-mobile-light_dr2nzs.svg'
+const darkICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903928/pattern-background-mobile-dark_pxpjye.svg'
+const darkICON_tablet = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903949/pattern-background-tablet-dark_yshmyc.svg'
+const lightICON_tablet = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903958/pattern-background-tablet-light_dlgvg6.svg'
 // the reason why i have these in cloudinary is because /assets/... doesn't work... p.s. my friends won't have to look for them in google
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [bgImage, setBgImage] = useState('https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-light_rfwg6f.svg');
+  const [bgImage, setBgImage] = useState(lightICON);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
   useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add('dark-mode');
-      setBgImage('https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-dark_ogqm8s.svg');
-    } else {
-      document.body.classList.remove('dark-mode');
-      setBgImage('https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-light_rfwg6f.svg');
-    }
+    const updateBgImage = () => {
+      const width = window.innerWidth;
+      if (darkMode) {
+        document.body.classList.add('dark-mode');
+        if (width < 768) {
+          setBgImage(darkICON_mobile);
+        } else if (width < 1024) {
+          setBgImage(darkICON_tablet);
+        } else {
+          setBgImage(darkICON);
+        }
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (width < 768) {
+          setBgImage(lightICON_mobile);
+        } else if (width < 1024) {
+          setBgImage(lightICON_tablet);
+        } else {
+          setBgImage(lightICON);
+        }
+      }
+    };
+
+    updateBgImage();
+    window.addEventListener('resize', updateBgImage);
+
+    return () => {
+      window.removeEventListener('resize', updateBgImage);
+    };
   }, [darkMode]);
 
   return (
