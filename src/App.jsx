@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
+const htmlICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/html_qai183.svg';
+const cssICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/css_ozpcjt.svg';
+const jsICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/js_d5uzgu.svg';
+const accessibilityICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740902093/js_d5uzgu.svg';
+
+// the reason why i have these in cloudinary is because /assets/... doesn't work... p.s. my friends won't have to look for them in google
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
