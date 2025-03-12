@@ -69,7 +69,7 @@ function App() {
       </div>
     <div 
           style={{ 
-            color: darkMode ? '#1e293b' : '#f8fafc',
+            backgroundColor: darkMode ? '#1e293b' : '#f8fafc',
             transition: 'background-color 0.3s ease-in-out, background-image 0.3s ease-in-out'
           }}
           className="grid grid-cols-1 gap-4 p-4 max-w-md ml-384 mx-auto">
