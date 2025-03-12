@@ -16,6 +16,13 @@ function App() {
     setDarkMode(!darkMode);
   };
 
+  const quizzes = [
+    { id: 1, title: "HTML Quiz", description: "Test your HTML knowledge!" },
+    { id: 2, title: "CSS Quiz", description: "How well do you know CSS?" },
+    { id: 3, title: "JavaScript Quiz", description: "Check your JS skills!" },
+    { id: 4, title: "React Quiz", description: "Are you a React pro?" }
+  ];
+
   useEffect(() => {
     const updateBgImage = () => {
       const width = window.innerWidth;
@@ -60,6 +67,22 @@ function App() {
       <div className="container mx-auto px-4 py-8">
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </div>
+    <div 
+          style={{ 
+            color: darkMode ? '#1e293b' : '#f8fafc',
+            transition: 'background-color 0.3s ease-in-out, background-image 0.3s ease-in-out'
+          }}
+          className="grid grid-cols-1 gap-4 p-4 max-w-md ml-384 mx-auto">
+      {quizzes.map((quiz) => (
+        <div
+          key={quiz.id}
+          className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 transition duration-300 hover:scale-105"
+        >
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{quiz.title}</h2>
+          <p className="text-gray-700 dark:text-gray-300">{quiz.description}</p>
+        </div>
+      ))}
+    </div>
     </div>
   );
 }
