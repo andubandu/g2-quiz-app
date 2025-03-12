@@ -61,7 +61,7 @@ function App() {
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       
 </div>
-<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12">
+<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12 ml-32">
           <div className="md:w-1/2">
             <h1 className={`text-4xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-slate-800'} transition-colors duration-300`}>
               Welcome to the
@@ -70,7 +70,7 @@ function App() {
               Frontend Quiz!
             </h1>
             <p className={`text-xl italic ${darkMode ? 'text-gray-300' : 'text-slate-600'} transition-colors duration-300`}>
-              Pick a subject to get started!
+              Pick a subject to get started.
             </p>
           </div>
         </div>
