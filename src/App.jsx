@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
+import quizData from './data/quizData.json'; // Import your JSON data
+
 const darkICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-dark_ogqm8s.svg';
 const lightICON = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740856278/bg-light_rfwg6f.svg';
-const lightICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903938/pattern-background-mobile-light_dr2nzs.svg'
-const darkICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903928/pattern-background-mobile-dark_pxpjye.svg'
-const darkICON_tablet = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903949/pattern-background-tablet-dark_yshmyc.svg'
-const lightICON_tablet = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903958/pattern-background-tablet-light_dlgvg6.svg'
-// the reason why i have these in cloudinary is because /assets/... doesn't work... p.s. my friends won't have to look for them in google
+const lightICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903938/pattern-background-mobile-light_dr2nzs.svg';
+const darkICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903928/pattern-background-mobile-dark_pxpjye.svg';
+const darkICON_tablet = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903949/pattern-background-tablet-dark_yshmyc.svg';
+const lightICON_tablet = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903958/pattern-background-tablet-light_dlgvg6.svg';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -59,10 +60,9 @@ function App() {
     >
       <div className="container mx-auto px-4 py-8">
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      
-</div>
-<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12 ml-32">
-          <div className="md:w-1/2">
+
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12">
+          <div className="md:w-1/2 px-4 md:px-0">
             <h1 className={`text-4xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-slate-800'} transition-colors duration-300`}>
               Welcome to the
             </h1>
@@ -75,6 +75,7 @@ function App() {
           </div>
         </div>
     </div>
+  </div>
   );
 }
 
