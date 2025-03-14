@@ -156,60 +156,50 @@ function App() {
             </div>
           </div>
         ) : showResult ? (
-          <div className="flex items-center justify-center">
-            <div className="mr-4">
-              <h1
-                className={`font-semibold text-5xl md:text-6xl ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                }`}
-              >
-                Quiz Completed
-              </h1>
-              <h1 className='text-5xl md:text-6xl font-bold italic'> 
-                <strong>
-                You scored...
-                </strong>
-              </h1>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-            </div>
-            <div
-              className={`rounded-2xl shadow-lg p-8 w-96 ${
-                darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-              }`}
-            >
-              <div className="flex items-center mb-6">
-                <div className="rounded-md p-2 mr-4">
-                  <img
-                    src={selectedQuiz.icon}
-                    alt={`${selectedQuiz.title} Icon`}
-                    className="h-6 w-6"
-                  />
-                </div>
-                <h2 className="text-xl font-semibold">
-                  {selectedQuiz.title}
-                </h2>
-              </div>
-              <div className="text-center mb-6">
-                <h1 className="text-8xl font-bold">{score}</h1>
-                <p className="text-sm">
-                  out of {selectedQuiz.questions.length}
-                </p>
-              </div>
-              <button
-                onClick={() => setSelectedQuiz(null)}
-                className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition duration-300"
-              >
-                Play Again
-              </button>
-            </div>
-          </div>
+         <div className="flex items-center justify-center">
+  <div className="mr-4">
+    <h1
+      className={`font-semibold text-5xl md:text-6xl ${
+        darkMode ? 'text-gray-300' : 'text-gray-700'
+      }`}
+    >
+      Quiz Completed
+    </h1>
+    <h1 className="text-5xl md:text-6xl font-bold italic">
+      <strong>You scored...</strong>
+    </h1>
+  </div>
+  
+  <div
+    className={`rounded-2xl shadow-lg p-8 w-96 ${
+      darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+    } mt-8`}  
+  >
+    <div className="flex items-center mb-6">
+      <div className="rounded-md p-2 mr-4">
+        <img
+          src={selectedQuiz.icon}
+          alt={`${selectedQuiz.title} Icon`}
+          className="h-6 w-6"
+        />
+      </div>
+      <h2 className="text-xl font-semibold">{selectedQuiz.title}</h2>
+    </div>
+    <div className="text-center mb-6">
+      <h1 className="text-8xl font-bold">{score}</h1>
+      <p className="text-sm">
+        out of {selectedQuiz.questions.length}
+      </p>
+    </div>
+    <button
+      onClick={() => setSelectedQuiz(null)}
+      className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition duration-300"
+    >
+      Play Again
+    </button>
+  </div>
+</div>
+
         ) : (
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12">
          <div className="md:w-1/2 px-4 md:px-0">
