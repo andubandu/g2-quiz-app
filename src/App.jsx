@@ -8,7 +8,8 @@ const lightICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v174
 const darkICON_mobile = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903928/pattern-background-mobile-dark_pxpjye.svg';
 const darkICON_tablet = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903949/pattern-background-tablet-dark_yshmyc.svg';
 const lightICON_tablet = 'https://res.cloudinary.com/dyuabsnoo/image/upload/v1740903958/pattern-background-tablet-light_dlgvg6.svg';
-
+const checkmarkIcon = 'https://res.cloudinary.com/dmyrg759k/image/upload/v1741968034/d50a2eb3-01d4-4476-bb52-a5f338d923d6.png'
+const xIcon = 'https://res.cloudinary.com/dmyrg759k/image/upload/v1741968083/dbbb7fac-1bb6-4e56-bde4-1d33b961464d.png'
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [bgImage, setBgImage] = useState(lightICON);
@@ -25,16 +26,35 @@ function App() {
       const width = window.innerWidth;
       if (darkMode) {
         document.body.classList.add('dark-mode');
-        setBgImage(width < 768 ? darkICON_mobile : width < 1024 ? darkICON_tablet : darkICON);
+        if (width < 768) {
+          setBgImage(darkICON_mobile);
+        } else if (width < 1024) {
+          setBgImage(darkICON_tablet);
+        } else {
+          setBgImage(darkICON);
+        }
       } else {
         document.body.classList.remove('dark-mode');
-        setBgImage(width < 768 ? lightICON_mobile : width < 1024 ? lightICON_tablet : lightICON);
+        if (width < 768) {
+          setBgImage(lightICON_mobile);
+        } else if (width < 1024) {
+          setBgImage(lightICON_tablet);
+        } else {
+          setBgImage(lightICON);
+        }
       }
     };
+  
     updateBgImage();
     window.addEventListener('resize', updateBgImage);
-    return () => window.removeEventListener('resize', updateBgImage);
-  }, [darkMode]);
+  
+    document.body.style.backgroundImage = `url(${bgImage})`;
+  
+    return () => {
+      window.removeEventListener('resize', updateBgImage);
+    };
+  }, [darkMode, bgImage]);  
+  
 
   const startQuiz = (quiz) => {
     setSelectedQuiz(quiz);
@@ -62,69 +82,260 @@ function App() {
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300 ease-in-out bg-cover bg-center bg-no-repeat"
-      style={{ backgroundColor: darkMode ? '#1e293b' : '#f8fafc', backgroundImage: `url(${bgImage})` }}
+      className={`min-h-screen transition-colors duration-300 ease-in-out bg-gradient-to-br ${
+        darkMode ? 'from-gray-900 to-gray-800' : 'from-gray-50 to-gray-100'
+      }`}
     >
       <div className="container mx-auto px-4 py-8">
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-
-        {/* Homepage title here */}
+  
         {!selectedQuiz ? (
-          <div className="text-center">
-            <h1 className={`text-4xl font-semibold mb-0 ${darkMode ? 'text-white' : 'text-slate-800'} transition-colors duration-300`}>
-  Welcome to the
-</h1>
-<h1 className={`text-5xl font-bold ${darkMode ? 'text-white' : 'text-slate-800'} transition-colors duration-300`}>
-  Frontend Quiz!
-</h1>
-
-
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {quizData.quizzes.map((quiz) => (
-                <button
-                  key={quiz.title}
-                  className={`flex items-center w-full p-4 rounded-lg shadow-md transition-colors duration-300 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}
-                  onClick={() => startQuiz(quiz)}
-                >
-                  <div className="rounded-md p-2 mr-4 bg-gray-200">
-                    <img src={quiz.icon} alt={`${quiz.title} Icon`} className="h-6 w-6" />
-                  </div>
-                  <span>{quiz.title}</span>
-                </button>
-              ))}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12">
+            <div className="md:w-1/2 px-4 md:px-0">
+              <h1
+                className={`text-4xl font-bold mb-2 ${
+                  darkMode ? 'text-white' : 'text-slate-800'
+                } transition-colors duration-300`}
+              >
+                Welcome to the
+              </h1>
+              <h1
+                className={`text-5xl font-bold mb-6 ${
+                  darkMode ? 'text-white' : 'text-slate-800'
+                } transition-colors duration-300`}
+              >
+                Frontend Quiz!
+              </h1>
+              <p
+                className={`text-xl italic ${
+                  darkMode ? 'text-gray-300' : 'text-slate-600'
+                } transition-colors duration-300`}
+              >
+                Pick a subject to get started.
+              </p>
+            </div>
+            <div className="md:w-1/2">
+              {quizData.quizzes.map((quiz) => {
+                let bgColor = '';
+                switch (quiz.title) {
+                  case 'HTML':
+                    bgColor = 'bg-orange-200';
+                    break;
+                  case 'CSS':
+                    bgColor = 'bg-green-200';
+                    break;
+                  case 'JavaScript':
+                    bgColor = 'bg-blue-200';
+                    break;
+                  case 'Accessibility':
+                    bgColor = 'bg-purple-200';
+                    break;
+                  default:
+                    bgColor = 'bg-gray-200';
+                }
+  
+                return (
+                  <button
+                    key={quiz.title}
+                    className={`flex items-center w-full p-4 mb-4 rounded-lg shadow-md ${
+                      darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+                    } transition-colors duration-300`}
+                    onClick={() => startQuiz(quiz)}
+                  >
+                    <div className={`rounded-md p-2 mr-4 ${bgColor}`}>
+                      <img
+                        src={quiz.icon}
+                        alt={`${quiz.title} Icon`}
+                        className="h-6 w-6"
+                      />
+                    </div>
+                    <span>{quiz.title}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         ) : showResult ? (
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-4">Quiz Completed!</h2>
-            <p className="text-xl">Your score: {score} / {selectedQuiz.questions.length}</p>
-            <button onClick={() => setSelectedQuiz(null)} className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg">Back to Quizzes</button>
+          <div className="flex items-center justify-center">
+            <div className="mr-4">
+              <h1
+                className={`font-semibold text-5xl md:text-6xl ${
+                  darkMode ? 'text-gray-300' : 'text-gray-700'
+                }`}
+              >
+                Quiz Completed
+              </h1>
+              <h1 className='text-5xl md:text-6xl font-bold italic'> 
+                <strong>
+                You scored...
+                </strong>
+              </h1>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+            </div>
+            <div
+              className={`rounded-2xl shadow-lg p-8 w-96 ${
+                darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+              }`}
+            >
+              <div className="flex items-center mb-6">
+                <div className="rounded-md p-2 mr-4">
+                  <img
+                    src={selectedQuiz.icon}
+                    alt={`${selectedQuiz.title} Icon`}
+                    className="h-6 w-6"
+                  />
+                </div>
+                <h2 className="text-xl font-semibold">
+                  {selectedQuiz.title}
+                </h2>
+              </div>
+              <div className="text-center mb-6">
+                <h1 className="text-8xl font-bold">{score}</h1>
+                <p className="text-sm">
+                  out of {selectedQuiz.questions.length}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedQuiz(null)}
+                className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition duration-300"
+              >
+                Play Again
+              </button>
+            </div>
           </div>
         ) : (
-          <div className="max-w-xl mx-auto">
-            <h2 className="text-2xl font-bold mb-4">{selectedQuiz.title} Quiz</h2>
-            <p className="text-lg mb-4">{selectedQuiz.questions[currentQuestion].question}</p>
-            <div className="grid gap-4">
-              {selectedQuiz.questions[currentQuestion].options.map((option) => (
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-12">
+         <div className="md:w-1/2 px-4 md:px-0">
+  <p className={`text-gray-500 text-sm italic ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+    Question {currentQuestion + 1} of {selectedQuiz.questions.length}
+  </p>
+
+  <h1 className={`text-4xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-slate-800'} transition-colors duration-300`}>
+    {selectedQuiz.questions[currentQuestion].question}
+  </h1>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+  <div className="mt-4 bg-purple-200 h-2 rounded-full overflow-hidden">
+    <div
+      className="bg-purple-600 h-full transition-all duration-500"
+      style={{
+        width: `${
+          ((currentQuestion + 1) / selectedQuiz.questions.length) * 100
+        }%`,
+      }}
+    ></div>
+  </div>
+  <br />
+</div>
+
+            <div className="md:w-1/2">
+              {selectedQuiz.questions[currentQuestion].options.map(
+                (option, index) => {
+                  let bgColor = '';
+                  switch (selectedQuiz.title) {
+                    case 'HTML':
+                      bgColor = 'bg-orange-200';
+                      break;
+                    case 'CSS':
+                      bgColor = 'bg-green-200';
+                      break;
+                    case 'JavaScript':
+                      bgColor = 'bg-blue-200';
+                      break;
+                    case 'Accessibility':
+                      bgColor = 'bg-purple-200';
+                      break;
+                    default:
+                      bgColor = 'bg-gray-200';
+                  }
+                  let buttonClass = `flex items-center w-full p-4 mb-4 rounded-lg shadow-md ${
+                    darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+                  } transition-colors duration-300`;
+                  let icon = null;
+  
+                  if (selectedAnswer) {
+                    if (
+                      option === selectedQuiz.questions[currentQuestion].answer
+                    ) {
+                      bgColor = 'bg-green-200';
+                      buttonClass = `flex items-center w-full p-4 mb-4 rounded-lg shadow-md border-2 border-green-500 bg-green-100 text-gray-800 transition-colors duration-300`;
+                      icon = (
+                        <img
+                          src={checkmarkIcon}
+                          alt="Correct"
+                          className="ml-2 h-5 w-5"
+                        />
+                      );
+                    } else if (
+                      option === selectedAnswer &&
+                      option !== selectedQuiz.questions[currentQuestion].answer
+                    ) {
+                      bgColor = 'bg-red-200';
+                      buttonClass = `flex items-center w-full p-4 mb-4 rounded-lg shadow-md border-2 border-red-500 bg-red-100 text-gray-800 transition-colors duration-300`;
+                      icon = (
+                        <img
+                          src={xIcon}
+                          alt="Incorrect"
+                          className="ml-2 h-5 w-5"
+                        />
+                      );
+                    }
+                  }
+  
+                  return (
+                    <button
+                      key={option}
+                      className={buttonClass}
+                      onClick={() => handleAnswer(option)}
+                      disabled={!!selectedAnswer}
+                    >
+                      <div
+                        className={`rounded-md p-2 mr-4 ${bgColor} ${
+                          option ===
+                            selectedQuiz.questions[currentQuestion].answer &&
+                          selectedAnswer
+                            ? 'bg-green-500 text-white'
+                            : ''
+                        }`}
+                      >
+                        <span className="font-bold">
+                          {String.fromCharCode(65 + index)}
+                        </span>
+                      </div>
+                      <span>{option}</span>
+                      {icon}
+                    </button>
+                  );
+                }
+              )}
+              {selectedAnswer && (
                 <button
-                  key={option}
-                  onClick={() => handleAnswer(option)}
-                  className={`w-full p-3 border rounded-lg transition ${selectedAnswer ? (option === selectedQuiz.questions[currentQuestion].answer ? 'bg-green-500 text-white' : option === selectedAnswer ? 'bg-red-500 text-white' : 'opacity-50') : 'hover:bg-blue-500 hover:text-white'}`}
-                  disabled={!!selectedAnswer}
+                  onClick={nextQuestion}
+                  className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition duration-300 mt-4"
                 >
-                  {option}
-                </button>
-              ))}
-            </div>
-            {selectedAnswer && (
-              <button onClick={nextQuestion} className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg">Next →</button>
+                  Answer
+              </button>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
 }
 
 export default App;
